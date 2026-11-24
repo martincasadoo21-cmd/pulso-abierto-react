@@ -1,131 +1,99 @@
-# Pulso Abierto — Consulta de criptomonedas
+# Pulso Abierto
 
 ## Descripción
 
-Pulso Abierto es una aplicación web desarrollada como parte de la Actividad Práctica Integradora 2 de la materia Programación Web de Teclab.
+Pulso Abierto es una aplicación web que permite consultar los precios de Bitcoin, Ethereum y Solana en dólares mediante la API de CoinGecko.
 
-El proyecto continúa el desarrollo realizado en el Módulo 1, incorporando React, TypeScript, componentes reutilizables, validación de formularios y navegación entre páginas.
-
-La aplicación permite consultar los precios de Bitcoin, Ethereum y Solana en dólares estadounidenses mediante la API pública de CoinGecko.
+El proyecto fue desarrollado durante las cuatro actividades prácticas de la materia Programación Web de Teclab.
 
 ## Tecnologías utilizadas
 
 - React
 - TypeScript
 - Vite
-- HTML y CSS
-- Zod
 - React Router
-- API CoinGecko
+- Zustand
+- Zod
+- Vitest
+- Testing Library
 - ESLint
-- Prettier
+- Git y GitHub
+- Vercel
 
 ## Funcionalidades
 
 - Consulta de precios de criptomonedas.
-- Búsqueda por nombre.
-- Selección de criptomoneda.
-- Validación de formularios con Zod.
-- Visualización de resultados mediante tarjetas.
-- Marcado y desmarcado de favoritos.
-- Navegación a páginas de detalle.
-- Validación de identificadores en las rutas.
-- Manejo de estados de carga, error y ausencia de resultados.
-- Posibilidad de reintentar una consulta fallida.
-- Diseño adaptable a dispositivos móviles.
-
-Los favoritos se mantienen durante la sesión de la página, pero no se guardan permanentemente al recargar el navegador.
+- Búsqueda y filtrado por nombre.
+- Formulario controlado con validación.
+- Navegación entre el listado y las páginas de detalle.
+- Gestión y persistencia de favoritos.
+- Diseño adaptable a dispositivos móviles y de escritorio.
 
 ## Instalación
 
-Requisitos:
+Clonar el repositorio:
 
-- Node.js
-- npm
+    git clone https://github.com/martincasadoo21-cmd/pulso-abierto-react.git
 
-Abrir una terminal en la carpeta del proyecto y ejecutar:
+Ingresar a la carpeta del proyecto:
 
-```bash
-npm install
-```
+    cd pulso-abierto-react
 
-## Ejecutar la aplicación
+Instalar las dependencias:
 
-```bash
-npm run dev
-```
+    npm install
 
-Abrir la dirección local indicada por Vite, normalmente:
+## Ejecución en desarrollo
 
-http://localhost:5173/
+    npm run dev
 
-## Verificaciones
+## Pruebas automatizadas
 
-Comprobar TypeScript:
+    npm run test
 
-```bash
-npx tsc --noEmit -p tsconfig.app.json
-```
+## Verificación del código
 
-Ejecutar ESLint:
+    npm run lint
 
-```bash
-npm run lint
-```
+## Build productivo
 
-Generar la versión de producción:
+    npm run build
 
-```bash
-npm run build
-```
+## Preview
 
-Los comandos de TypeScript, ESLint y compilación se ejecutaron correctamente durante el desarrollo.
+    npm run preview
 
-## Estructura del proyecto
+## Mejora de mantenibilidad
 
-- `src/components/`: componentes reutilizables.
-- `src/pages/`: páginas y navegación.
-- `src/services/coingecko.ts`: consulta y procesamiento de datos externos.
-- `src/schemas/consultaSchema.ts`: validación del formulario mediante Zod.
-- `src/types/`: tipos de TypeScript.
-- `src/App.tsx`: lógica y rutas principales.
-- `src/App.css`: estilos de la aplicación.
-- `capturas/`: evidencias de funcionamiento.
+Se identificó código duplicado relacionado con el formato de precios en los archivos TarjetaCriptomoneda.tsx y DetalleCriptomoneda.tsx.
 
-## Rutas
+Para solucionar este problema, se creó la función reutilizable formatearPrecio dentro de src/utils/formatearPrecio.ts.
 
-- `/`: página principal.
-- `/criptomonedas/bitcoin`: detalle de Bitcoin.
-- `/criptomonedas/ethereum`: detalle de Ethereum.
-- `/criptomonedas/solana`: detalle de Solana.
-- Otras rutas: página no encontrada.
+De esta manera, ambos componentes utilizan la misma función y se facilita el mantenimiento del código sin modificar el comportamiento de la aplicación.
 
-## Pruebas realizadas
+Para comprobar que no se produjeron regresiones, se ejecutaron las pruebas automatizadas, ESLint, el build productivo y una verificación manual de los precios.
 
-Se realizaron pruebas de consulta exitosa, validación de entradas, favoritos, navegación a páginas de detalle, identificadores incorrectos, errores de conexión, recuperación después de fallas, búsquedas sin resultados y diseño móvil.
+También se actualizó Vitest para resolver una incompatibilidad con la versión instalada de Vite.
 
-Las evidencias están organizadas en la carpeta `capturas/`.
+## Despliegue
 
-## Refactorización y uso de IA
+La aplicación se encuentra publicada en Vercel.
 
-La aplicación original del Módulo 1 estaba desarrollada principalmente con TypeScript y manipulación directa del DOM.
+URL pública:
+https://pulso-abierto-react-gilt.vercel.app/
 
-En el Módulo 2 se reorganizó utilizando componentes React, propiedades, estado, servicios y rutas.
+Repositorio:
+https://github.com/martincasadoo21-cmd/pulso-abierto-react
 
-Se utilizó ChatGPT como herramienta de asistencia para comprender los requisitos, organizar el desarrollo, implementar mejoras y orientar la resolución de errores y las pruebas. Las funcionalidades fueron comprobadas manualmente en Visual Studio Code y Chrome.
+Se incorporó el archivo vercel.json para permitir el acceso directo y la recarga de las rutas de detalle.
 
-## Observaciones
+## Verificación final
 
-Durante la revisión de dependencias, npm informó 12 vulnerabilidades moderadas relacionadas principalmente con herramientas de desarrollo y análisis estático.
-
-Se registró esta situación para su revisión posterior. No se aplicaron actualizaciones forzadas.
-
-La disponibilidad y actualización de los precios dependen de la API de CoinGecko y de la conexión a Internet.
-
-## Autor
-
-Martín Casado
-
-Tecnicatura en Programación — Teclab
-
-Actividad Práctica Integradora 2 — Programación Web
+- Pruebas automatizadas: 7 de 7 aprobadas.
+- ESLint: ejecutado sin errores.
+- Build productivo: generado correctamente.
+- Preview: comprobado correctamente.
+- Despliegue en Vercel: realizado correctamente.
+- Consulta a la API: comprobada.
+- Diseño responsivo: comprobado.
+- Fecha de verificación: 24/11/2026.
